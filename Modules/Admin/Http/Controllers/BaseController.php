@@ -13,10 +13,17 @@ use Illuminate\Routing\Controller;
 
 class BaseController extends Controller
 {
+    protected $logger;
+
+    public function __construct()
+    {
+
+    }
+
     public function success($data = []) {
         return response()->json([
             'code' => 0,
-            'message' => config('errorcode.code')[200],
+            'message' => config('errorcode.code')[0],
             'data' => $data
         ]);
     }
