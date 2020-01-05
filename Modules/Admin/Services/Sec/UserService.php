@@ -11,6 +11,7 @@ namespace Modules\Admin\Services\Sec;
 
 use Modules\Admin\Services\BaseService;
 
+use Illuminate\Support\Facades\DB;
 use Modules\Admin\Models\Sec\User;
 
 class UserService extends BaseService
@@ -19,6 +20,10 @@ class UserService extends BaseService
 
     public function __construct(User $userModel) {
         $this->userModel = $userModel;
+    }
+
+    public function get(string $id) {
+        return DB::select('select * from t_sec_user where id = ?', [$id]);
     }
 
     public function create(string $account, string $password, string $nickName, string $avatar, string $trueName,
@@ -34,14 +39,10 @@ class UserService extends BaseService
         $user->password = bcrypt($password);
         $user->nick_name = $nickName;
         $user->avatar = $avatar;
-        $user->true_name = $trueName;
         $user->gender = $gender;
-        $user->id_card_no = $idCardNo;
-        $user->sec_email = $secEmail;
         $user->description = '';
-        $user->meta_created = date('Y-m-d H:i:s');
-        $user->meta_updated = date('Y-m-d H:i:s');
-        $user->meta_logic_flag = 1;
+        //$user->created_at = date('Y-m-d H:i:s');
+        //$user->updated_at = date('Y-m-d H:i:s');
 
         if ($user->save() === false) {
             return ['result' => false, 'message' => '保存失败'];

@@ -25,6 +25,12 @@ class UserController extends BaseController
         $this->userService = $userService;
     }
 
+    public function get(string $id)
+    {
+        $result = $this->userService->get($id);
+        $this->success($result);
+    }
+
     public function create(Request $request)
     {
         $account = $request->input('account');
