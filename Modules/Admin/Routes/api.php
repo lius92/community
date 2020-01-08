@@ -17,3 +17,10 @@ Route::middleware('auth:api')->get('/admin', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('sec')->group(function() {
+    Route::get('/user/{id}', 'Sec\UserController@get');
+    Route::get('/users', 'Sec\UserController@getList');
+    Route::post('/user', 'Sec\UserController@create');
+    Route::put('/user', 'Sec\UserController@update');
+    Route::delete('/user/{id}', 'Sec\UserController@delete');
+});

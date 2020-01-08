@@ -28,11 +28,11 @@ class BaseController extends Controller
         ]);
     }
 
-    public function fail($code, $data = []) {
+    public function failed($code = -1, $message = '') {
         return response()->json([
             'code' => $code,
-            'message' => config('errorcode.code')[$code],
-            'data' => $data
+            'message' => config('errorcode.code')[$code] ?? $message,
+            'data' => []
         ]);
     }
 

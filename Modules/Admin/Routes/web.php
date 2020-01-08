@@ -36,10 +36,4 @@ Route::prefix('org')->group(function() {
 
 });
 
-Route::prefix('sec')->group(function() {
-    Route::get('/user/{id}', 'Sec\UserController@get');
-    Route::get('/users', 'Sec\UserController@getList');
-    Route::post('/user', 'Sec\UserController@create');
-    Route::put('/user', 'Sec\UserController@update');
-    Route::delete('/user/{id}', 'Sec\UserController@delete');
-});
+

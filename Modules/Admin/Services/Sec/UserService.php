@@ -34,15 +34,14 @@ class UserService extends BaseService
         }
 
         $user = new  User();
-
         $user->account = $account;
         $user->password = bcrypt($password);
         $user->nick_name = $nickName;
         $user->avatar = $avatar;
         $user->gender = $gender;
         $user->description = '';
-        //$user->created_at = date('Y-m-d H:i:s');
-        //$user->updated_at = date('Y-m-d H:i:s');
+        $user->created_at = date('Y-m-d H:i:s');
+        $user->updated_at = date('Y-m-d H:i:s');
 
         if ($user->save() === false) {
             return ['result' => false, 'message' => '保存失败'];
