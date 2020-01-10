@@ -8,23 +8,33 @@
 
 namespace Modules\Admin\Models\Sec;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
-use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
+class User extends Authenticatable implements JWTSubject
 {
-    //如果数据库中字段 不是created_at updated_at 则在这里指定
-    //const CREATED_AT = '';
-    //const UPDATED_AT = '';
+    use Notifiable;
 
-    protected $table = "t_sec_user";
+    protected $table = 'sec_user';
 
-    protected $fillable = ['id','account','password','nick_name','avatar','true_name', 'sec_mail', 'gender'];
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
 
-    protected $hidden = [
-        'password'
-    ];
-
-
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

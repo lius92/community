@@ -20,7 +20,7 @@ class BaseController extends Controller
 
     }
 
-    public function success($data = []) {
+    public function success($data = null) {
         return response()->json([
             'code' => 0,
             'message' => config('errorcode.code')[0],
@@ -32,7 +32,7 @@ class BaseController extends Controller
         return response()->json([
             'code' => $code,
             'message' => config('errorcode.code')[$code] ?? $message,
-            'data' => []
+            'data' => null
         ]);
     }
 
