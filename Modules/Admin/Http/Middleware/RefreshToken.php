@@ -22,7 +22,7 @@ class RefreshToken extends BaseMiddleware
                 return $next($request);
             }
             throw new UnauthorizedHttpException('jwt-auth', '未登录');
-        } catch (TokenExpiredException $exception){
+        } catch (TokenExpiredException $exception) {
             //是否可以刷新,刷新后加入到响应头
             try{
                 $token = $this->auth->refresh();
